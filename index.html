@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Ranchito — Asadero, Restaurante y Panadería</title>
+  <meta name="description" content="Mi Ranchito en Tocaima: Asadero, Restaurante y Panadería artesanal. Almuerzos ejecutivos, platos típicos, carnes asadas, pan recién horneado y bebidas. Domicilios en Tocaima (6:30 AM - 8:30 PM) y pagos por Nequi (321 206 5148)." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="icon" type="image/x-icon" href="icono.ico" sizes="any">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header id="header">
+  <div class="nav-container">
+    <a class="logo" href="#inicio">
+      <span class="logo-icon">🥖</span>
+      <span class="logo-text">Mi Ranchito</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio" class="nav-link active">Inicio</a>
+      <a href="#asadero" class="nav-link">Asadero</a>
+      <a href="#panaderia" class="nav-link">Panadería</a>
+      <a href="#restaurante" class="nav-link">Restaurante</a>
+      <a href="#bebidas" class="nav-link">Bebidas</a>
+      <a href="#nosotros" class="nav-link">Nosotros</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="cart-btn" id="cartBtn" aria-label="Ver pedido y pagar">
+        🛒 <span class="cart-label">Pagar</span><span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Asadero · Restaurante · Panadería</p>
+    <h1 class="hero-title">Bienvenidos a<br/><span class="gradient-text">Mi Ranchito</span></h1>
+    <p class="hero-subtitle">Platos ejecutivos, carnes asadas, picadas artesanales, pan recién horneado y bebidas heladas.<br/>Domicilios exclusivos en Tocaima (6:30 AM - 8:30 PM) · Paga por Nequi o Efectivo.</p>
+    <div class="hero-actions">
+      <a href="#asadero" class="btn btn-primary">🥩 Ver Picadas y Menú</a>
+      <a href="https://wa.me/573212065148" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">💬 Pedir por WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">🥩</span><span class="stat-label">Picadas & Carnes</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">🛵</span><span class="stat-label">Domicilio en Tocaima</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">💚</span><span class="stat-label">Pago por Nequi</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Explorar productos</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- CATEGORIAS RAPIDAS -->
+<section class="quick-cats">
+  <a href="#asadero" class="qcat-card">
+    <div class="qcat-icon">🥩</div>
+    <h3>Asadero</h3>
+    <p>Picadas tradicionales (cerdo y res) desde $30k</p>
+    <span class="qcat-arrow">&rarr;</span>
+  </a>
+  <a href="#panaderia" class="qcat-card">
+    <div class="qcat-icon">🥐</div>
+    <h3>Panadería y Dulces</h3>
+    <p>Pan de rollo, queso, mogollas, galletas y calados</p>
+    <span class="qcat-arrow">&rarr;</span>
+  </a>
+  <a href="#restaurante" class="qcat-card">
+    <div class="qcat-icon">🍽️</div>
+    <h3>Restaurante</h3>
+    <p>Almuerzos ejecutivos, platos típicos y desayunos</p>
+    <span class="qcat-arrow">&rarr;</span>
+  </a>
+  <a href="#bebidas" class="qcat-card">
+    <div class="qcat-icon">🥤</div>
+    <h3>Bebidas</h3>
+    <p>Gaseosas heladas, cervezas y jugos</p>
+    <span class="qcat-arrow">&rarr;</span>
+  </a>
+</section>
+
+<!-- SECCION ASADERO -->
+<section id="asadero" class="menu-section">
+  <div class="section-header">
+    <span class="section-badge badge-gold">🥩 Asadero Mi Ranchito</span>
+    <h2 class="section-title">Picadas Artesanales<br/>al Carbón</h2>
+    <p class="section-sub">Deliciosas picadas tradicionales con carne de cerdo y de res, acompañadas de yuca, plátano maduro y papa tostada. Elige la porción y valor a tu preferencia.</p>
+  </div>
+  <div class="asadero-gallery">
+    <img src="1.jpeg" alt="Carne asándose al carbón en Mi Ranchito" loading="lazy" />
+    <img src="2.jpeg" alt="Carnes a la parrilla en Mi Ranchito" loading="lazy" />
+  </div>
+  <div class="menu-grid" id="grid-asadero"></div>
+</section>
+
+<!-- SECCION PANADERIA Y GALLETAS -->
+<section id="panaderia" class="menu-section alt-bg">
+  <div class="section-header">
+    <span class="section-badge badge-gold">🥐 Panadería y Dulces</span>
+    <h2 class="section-title">Horneado con amor<br/>cada madrugada</h2>
+    <p class="section-sub">Los mejores panes artesanales, galletas caseras de corazón, avena, chips y dulces tradicionales.</p>
+  </div>
+  <div class="menu-filters" data-section="panaderia">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="panes">Panes</button>
+    <button class="filter-btn" data-filter="galletas">Galletas y Dulces</button>
+  </div>
+  <div class="menu-grid" id="grid-panaderia"></div>
+</section>
+
+<!-- SECCION EL RESTAURANTE -->
+<section id="restaurante" class="menu-section">
+  <div class="section-header">
+    <span class="section-badge badge-gold">🍽️ Restaurante</span>
+    <h2 class="section-title">Restaurante</h2>
+    <p class="section-sub">Consulta el menú del día directamente con nosotros.</p>
+  </div>
+  <div class="menu-grid" id="grid-restaurante"></div>
+  <div class="menu-dia-cta">
+    <a href="https://api.whatsapp.com/send?phone=573212065148&text=Hola,%20me%20gustar%C3%ADa%20saber%20cu%C3%A1l%20es%20el%20men%C3%BA%20del%20d%C3%ADa%20hoy" target="_blank" rel="noopener noreferrer" class="btn-menu-dia">
+      📲 Consultar Menú del Día
+    </a>
+  </div>
+</section>
+
+<!-- SECCION BEBIDAS -->
+<section id="bebidas" class="menu-section alt-bg">
+  <div class="section-header">
+    <span class="section-badge badge-red">🥤 Bebidas</span>
+    <h2 class="section-title">Frescura y Sabor<br/>para acompañar</h2>
+    <p class="section-sub">Gaseosas personales y familiares, y cervezas heladas disponibles para acompañar.</p>
+  </div>
+  <div class="menu-grid" id="grid-bebidas"></div>
+</section>
+
+<!-- BANNER PARALLAX: efecto premium con imagen fija + overlay -->
+<section class="parallax-banner" aria-label="Vive la experiencia Mi Ranchito">
+  <div class="parallax-banner-content">
+    <h2>Sabor de carbón,<br/>tradición casera</h2>
+    <p>Cada plato se prepara al momento con ingredientes frescos. Pide tu domicilio y disfruta la experiencia Mi Ranchito donde estés.</p>
+    <a href="https://wa.me/573212065148" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+      💬 Ordenar por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="about-section alt-bg">
+  <div class="about-grid">
+    <div class="about-text">
+      <span class="section-badge badge-gold">Nuestra Historia</span>
+      <h2 class="section-title">Mi Ranchito:<br/>Sabor y Tradición</h2>
+      <p>Somos un asadero, restaurante y panadería artesanal en Tocaima. Nos dedicamos a ofrecer los mejores almuerzos ejecutivos, platos típicos con carne asada, pan fresco y productos de excelente calidad.</p>
+      <p>Nos esmeramos día a día en brindarte la mejor atención, sabor casero inigualable y domicilios eficientes en todo Tocaima.</p>
+      <div class="values-grid">
+        <div class="value-card"><span class="value-icon">🌾</span><h4>Ingredientes Frescos</h4><p>Harinas, carnes e insumos de primera</p></div>
+        <div class="value-card"><span class="value-icon">❤️</span><h4>Hecho con Amor</h4><p>Sabor casero y recetas tradicionales</p></div>
+        <div class="value-card"><span class="value-icon">✅</span><h4>Precios Justos</h4><p>Excelente relación calidad - precio</p></div>
+        <div class="value-card"><span class="value-icon">🛵</span><h4>Domicilio en Tocaima</h4><p>Atención rápida a ambos WhatsApp</p></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="visual-card vc-1"><div class="vc-icon">🍖</div><p>Asadero & Restaurante</p><small>Almuerzos y platos típicos</small></div>
+      <div class="visual-card vc-2"><div class="vc-icon">🥖</div><p>Pan Artesanal</p><small>Fresco cada mañana</small></div>
+      <div class="visual-card vc-3"><div class="vc-icon">💚</div><p>Nequi Directo</p><small>321 206 5148</small></div>
+      <div class="visual-card vc-4"><div class="vc-icon">⏰</div><p>Abierto Todos los Días</p><small>6:30 AM - 8:30 PM</small></div>
+    </div>
+  </div>
+
+  <!-- EQUIPO DE DESARROLLO -->
+  <div class="team-container">
+    <div class="section-header team-header">
+      <span class="section-badge badge-gold">💻 Equipo de Desarrollo</span>
+      <h2 class="section-title">Nuestros Programadores</h2>
+      <p class="section-sub">El talento detrás del diseño, desarrollo y control de calidad de la plataforma web de Mi Ranchito.</p>
+    </div>
+
+    <div class="team-grid">
+      <!-- NICOLÁS -->
+      <div class="team-card">
+        <div class="team-avatar-container">
+          <div class="team-circle-avatar" onclick="openPhotoModal('yo.png', 'Nicolás', 'Líder de Equipo · Diseñador UX')" title="Clic para ampliar foto completa" role="button" tabindex="0">
+            <img src="yo.png" alt="Nicolás — Líder de equipo y Diseñador UX" class="team-circle-img" loading="lazy" />
+          </div>
+          <span class="team-badge-pill">👑 Líder &middot; Diseñador UX</span>
+        </div>
+        <div class="team-body">
+          <h3 class="team-name">Nicolás</h3>
+          <p class="team-role">Líder de Equipo &middot; Diseñador UX</p>
+          <p class="team-desc">Liderazgo general del proyecto, conceptualización visual, arquitectura de información y diseño de la experiencia de usuario (UX).</p>
+          <div class="team-tags">
+            <span class="team-tag-item">👑 Líder de Equipo</span>
+            <span class="team-tag-item">🎨 Diseñador UX</span>
+          </div>
+          <button type="button" class="btn-zoom-photo" onclick="openPhotoModal('yo.png', 'Nicolás', 'Líder de Equipo · Diseñador UX')">
+            🔍 Ver foto completa
+          </button>
+        </div>
+      </div>
+
+      <!-- MIRANDA -->
+      <div class="team-card">
+        <div class="team-avatar-container">
+          <div class="team-circle-avatar" onclick="openPhotoModal('miranda.png', 'Miranda', 'Tester · Control de Calidad')" title="Clic para ampliar foto completa" role="button" tabindex="0">
+            <img src="miranda.png" alt="Miranda — Tester" class="team-circle-img" loading="lazy" />
+          </div>
+          <span class="team-badge-pill">🔍 Tester / QA</span>
+        </div>
+        <div class="team-body">
+          <h3 class="team-name">Miranda</h3>
+          <p class="team-role">Tester &middot; Control de Calidad</p>
+          <p class="team-desc">Pruebas de software, aseguramiento de calidad (QA), validación de la experiencia de compra y verificación de pedidos.</p>
+          <div class="team-tags">
+            <span class="team-tag-item">🔍 Tester</span>
+            <span class="team-tag-item">🛡️ QA &amp; Pruebas</span>
+          </div>
+          <button type="button" class="btn-zoom-photo" onclick="openPhotoModal('miranda.png', 'Miranda', 'Tester · Control de Calidad')">
+            🔍 Ver foto completa
+          </button>
+        </div>
+      </div>
+
+      <!-- WILBER -->
+      <div class="team-card">
+        <div class="team-avatar-container">
+          <div class="team-circle-avatar" onclick="openPhotoModal('wilber.png', 'Wilber', 'Programador · Frontend')" title="Clic para ampliar foto completa" role="button" tabindex="0">
+            <img src="wilber.png" alt="Wilber — Programador" class="team-circle-img" loading="lazy" />
+          </div>
+          <span class="team-badge-pill">💻 Programador</span>
+        </div>
+        <div class="team-body">
+          <h3 class="team-name">Wilber</h3>
+          <p class="team-role">Programador &middot; Frontend</p>
+          <p class="team-desc">Implementación y desarrollo del código frontend, dinamismo del catálogo, carrito de compras y conexión a WhatsApp.</p>
+          <div class="team-tags">
+            <span class="team-tag-item">💻 Programador</span>
+            <span class="team-tag-item">⚡ Desarrollo Web</span>
+          </div>
+          <button type="button" class="btn-zoom-photo" onclick="openPhotoModal('wilber.png', 'Wilber', 'Programador · Frontend')">
+            🔍 Ver foto completa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
+  <div class="section-header">
+    <span class="section-badge badge-gold">📍 Encuéntranos</span>
+    <h2 class="section-title">Ven a visitarnos o pide a domicilio</h2>
+    <p class="section-sub">Atención rápida por WhatsApp (6:30 AM - 8:30 PM) y pagos por Nequi.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <strong>Ubicación</strong>
+          <p>Tocaima, Cundinamarca — <a href="https://www.google.com/maps/search/?api=1&amp;query=4.4547957,-74.6428656" target="_blank" rel="noopener noreferrer" style="color:#C8973A; font-weight:600;">Ver en Google Maps ↗</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">💬</span>
+        <div><strong>WhatsApp 1</strong><p>+57 321 206 5148</p></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div><strong>WhatsApp 2</strong><p>+57 322 366 9482</p></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">💚</span>
+        <div><strong>Nequi para Pagos</strong><p>321 206 5148</p></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">⏰</span>
+        <div><strong>Horario de Atención</strong><p>Lunes a Domingo: 6:30 AM - 8:30 PM</p></div>
+      </div>
+      <div class="wa-buttons">
+        <a href="https://wa.me/573212065148" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-full">
+          💬 WhatsApp 1 (321 206 5148)
+        </a>
+        <a href="https://wa.me/573223669482" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-alt btn-full" style="margin-top:10px">
+          💬 WhatsApp 2 (322 366 9482)
+        </a>
+      </div>
+    </div>
+    <div class="map-placeholder" onclick="window.open('https://www.google.com/maps/search/?api=1&query=4.4547957,-74.6428656','_blank')">
+      <iframe
+        src="https://www.google.com/maps?q=4.4547957,-74.6428656&amp;z=17&amp;output=embed"
+        width="100%" height="100%" style="border:0;border-radius:16px;" allowfullscreen="" loading="lazy"
+        title="Ubicación en Tocaima, Cundinamarca">
+      </iframe>
+      <div class="map-cta">🗺️ Ver en Google Maps &rarr;</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">🍖 Mi Ranchito</div>
+      <p>Asadero &middot; Restaurante &middot; Panadería<br/>Tocaima, Cundinamarca</p>
+    </div>
+    <div class="footer-links">
+      <h4>Menú</h4>
+      <a href="#inicio">Inicio</a>
+      <a href="#asadero">Asadero</a>
+      <a href="#panaderia">Panadería y Dulces</a>
+      <a href="#restaurante">Restaurante</a>
+      <a href="#bebidas">Bebidas</a>
+    </div>
+    <div class="footer-links">
+      <h4>Legal</h4>
+      <a href="#" onclick="showLegal('privacidad');return false;">Política de Privacidad</a>
+      <a href="#" onclick="showLegal('terminos');return false;">Términos y Condiciones</a>
+      <a href="#" onclick="showLegal('retracto');return false;">Derecho de Retracto</a>
+      <a href="#" onclick="showLegal('pqrs');return false;">PQRS</a>
+    </div>
+    <div class="footer-social">
+      <h4>Contacto (6:30 AM - 8:30 PM)</h4>
+      <div class="social-links">
+        <a href="https://wa.me/573212065148" target="_blank">💬 WhatsApp 1: 321 206 5148</a>
+        <a href="https://wa.me/573223669482" target="_blank">💬 WhatsApp 2: 322 366 9482</a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=4.4547957,-74.6428656" target="_blank" rel="noopener noreferrer">📍 Google Maps Tocaima</a>
+      </div>
+      <div class="payment-badges">
+        <span class="pay-badge nequi-badge">💚 Nequi: 321 206 5148</span>
+        <span class="pay-badge cash-badge">💵 Efectivo</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal-strip">
+    <p>&copy; 2026 Mi Ranchito (Tocaima). Todos los derechos reservados.</p>
+    <p class="footer-tiny">Cumplimos con el Estatuto del Consumidor (Ley 1480 de 2011) y Protección de Datos Personales (Ley 1581 de 2012).</p>
+  </div>
+</footer>
+
+<!-- CARRITO LATERAL DRAWER (REDISEÑADO) -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <!-- HEADER -->
+  <div class="cart-header">
+    <div class="cart-header-title">
+      <h2>🛒 Tu Pedido</h2>
+      <span class="cart-count-pill" id="cartCountPill">0 productos</span>
+    </div>
+    <div class="cart-header-actions">
+      <button type="button" class="cart-clear-btn" id="cartClearBtn" title="Vaciar carrito" aria-label="Vaciar carrito" style="display:none;">
+        🗑️ Vaciar
+      </button>
+      <button type="button" class="cart-close" id="cartClose" aria-label="Cerrar carrito">&#x2715;</button>
+    </div>
+  </div>
+
+  <!-- STEPPER POR FASES DEL CARRITO -->
+  <div class="cart-phase-indicator" id="cartPhaseIndicator">
+    <button type="button" class="phase-step-btn active" id="phaseStep1Btn" onclick="goToCartPhase(1)">
+      <span class="step-num">1</span>
+      <span class="step-text">Productos</span>
+    </button>
+    <div class="phase-step-line" id="phaseStepLine"></div>
+    <button type="button" class="phase-step-btn" id="phaseStep2Btn" onclick="goToCartPhase(2)">
+      <span class="step-num">2</span>
+      <span class="step-text">Entrega & Pedido</span>
+    </button>
+  </div>
+
+  <!-- BENEFIT / FREE DELIVERY BANNER -->
+  <div class="cart-benefit-banner" id="cartBenefitBanner">
+    <div class="benefit-icon" id="benefitIcon">💡</div>
+    <div class="benefit-content">
+      <strong id="benefitTitle">Domicilio en Tocaima</strong>
+      <p id="benefitText">¡Agrega una picada o plato con carne para obtener domicilio GRATIS!</p>
+    </div>
+  </div>
+
+  <!-- UNIFIED SCROLLABLE DRAWER CONTENT -->
+  <div class="cart-scroll-area" id="cartScrollArea">
+    
+    <!-- FASE 1: TUS PRODUCTOS -->
+    <div class="cart-phase-panel active" id="cartPhase1">
+      <!-- EMPTY STATE -->
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🧺</div>
+        <h3>Tu canasta está vacía</h3>
+        <p>Aún no has agregado productos del menú de Mi Ranchito.</p>
+        <button type="button" class="btn btn-primary btn-sm" id="cartExploreBtn">
+          🥖 Explorar Menú
+        </button>
+      </div>
+
+      <!-- CART ITEMS LIST -->
+      <ul class="cart-list" id="cartList"></ul>
+
+      <button type="button" class="btn btn-primary btn-full btn-phase-next" id="btnNextToPhase2" onclick="goToCartPhase(2)" style="display:none; margin-top:14px;">
+        <span>Continuar con Datos de Entrega</span>
+        <span>&rarr;</span>
+      </button>
+    </div>
+
+    <!-- FASE 2: ENTREGA Y PEDIDO -->
+    <div class="cart-phase-panel" id="cartPhase2" style="display:none;">
+      <button type="button" class="btn-phase-back" onclick="goToCartPhase(1)">
+        <span>&larr;</span> <span>Volver a revisar mis productos</span>
+      </button>
+
+      <!-- MODALIDAD DE ENTREGA -->
+      <div class="fulfillment-section">
+        <p class="section-form-title">🛵 Modalidad de Entrega (Solo Tocaima)</p>
+        <div class="fulfillment-options">
+          <label class="ful-opt" for="modeDelivery">
+            <input type="radio" name="fulfillment" id="modeDelivery" value="domicilio" checked onchange="toggleFulfillment()"/>
+            <span class="ful-opt-box">
+              <span class="ful-opt-icon">🛵</span>
+              <span class="ful-opt-text">Domicilio en Tocaima</span>
+            </span>
+          </label>
+          <label class="ful-opt" for="modePickup">
+            <input type="radio" name="fulfillment" id="modePickup" value="recoger" onchange="toggleFulfillment()"/>
+            <span class="ful-opt-box">
+              <span class="ful-opt-icon">🏪</span>
+              <span class="ful-opt-text">Recoger en local</span>
+            </span>
+          </label>
+        </div>
+        <small class="fulfillment-note" id="fulfillmentNote">📍 Domicilios exclusivamente para el municipio de Tocaima (6:30 AM - 8:30 PM).</small>
+      </div>
+
+
+
+      <!-- DATOS DEL CLIENTE -->
+      <div class="customer-form">
+        <p class="section-form-title">📋 Datos de Entrega</p>
+        <div class="input-with-icon">
+          <span class="input-icon">👤</span>
+          <input type="text" id="clientName" placeholder="Tu nombre completo *" class="form-input" required autocomplete="name" />
+        </div>
+        <div class="input-with-icon">
+          <span class="input-icon">📞</span>
+          <input type="tel" id="clientPhone" placeholder="Número de Celular *" class="form-input" required autocomplete="tel" />
+        </div>
+        
+        <div id="addressGroup">
+          <div class="input-with-icon">
+            <span class="input-icon">📍</span>
+            <input type="text" id="clientAddress" placeholder="Dirección de entrega en Tocaima *" class="form-input" autocomplete="street-address" />
+          </div>
+          <div class="input-with-icon">
+            <span class="input-icon">🏘️</span>
+            <input type="text" id="clientNeighborhood" placeholder="Barrio o Vereda en Tocaima *" class="form-input" />
+          </div>
+        </div>
+        
+        <div class="input-with-icon">
+          <span class="input-icon">📝</span>
+          <textarea id="clientNotes" placeholder="Observaciones (ej: término de carne, jugos helados, indicaciones de llegada)" class="form-input form-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED STICKY FOOTER (TOTAL & ACTIONS POR FASE) -->
+  <div class="cart-sticky-footer" id="cartFooter" style="display:none">
+    <div class="cart-summary">
+      <div class="summary-row"><span>Subtotal</span><span id="subtotalVal">$0</span></div>
+      <div class="summary-row">
+        <span>Domicilio</span>
+        <span id="deliveryVal" class="delivery-status-text">Gratis</span>
+      </div>
+      <div class="summary-row total-row">
+        <span>Total a Pagar</span>
+        <span id="totalVal" class="total-price-tag">$0</span>
+      </div>
+      <div id="deliveryDetailMsg" class="delivery-detail-msg"></div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN POR FASE -->
+    <div class="cart-actions-by-phase">
+      <!-- BOTÓN FASE 1: AVANZAR A FASE 2 -->
+      <div id="actionsPhase1">
+        <button type="button" class="btn btn-checkout btn-proceed" onclick="goToCartPhase(2)">
+          <span>🛵 Continuar con el Pedido</span>
+          <span id="btnPhase1Total">$0</span>
+        </button>
+      </div>
+
+      <!-- BOTONES FASE 2: CONFIRMAR POR WHATSAPP -->
+      <div id="actionsPhase2" style="display:none;">
+        <div class="checkout-buttons">
+          <button type="button" class="btn btn-checkout btn-wa1" onclick="checkout('573212065148')">
+            <span>💬 Confirmar en WhatsApp 1</span>
+            <small>321 206 5148</small>
+          </button>
+          <button type="button" class="btn btn-checkout btn-wa2" onclick="checkout('573223669482')">
+            <span>💬 Confirmar en WhatsApp 2</span>
+            <small>322 366 9482</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p class="cart-legal">
+      ⏰ 6:30 AM a 8:30 PM · Al pedir aceptas nuestros <a href="#" onclick="showLegal('terminos');return false;">Términos</a>.
+    </p>
+  </div>
+</aside>
+
+<!-- MODAL CONFIRMACION -->
+<div class="modal-overlay" id="modalOverlay" style="display:none">
+  <div class="modal" id="confirmModal">
+    <div class="modal-icon">🎉</div>
+    <h3 id="modalTitle">¡Pedido enviado!</h3>
+    <p id="modalMsg">Tu pedido fue procesado con éxito.</p>
+    <button class="btn btn-primary" onclick="closeModal()">Entendido</button>
+  </div>
+</div>
+
+<!-- MODAL LEGAL -->
+<div class="legal-modal-overlay" id="legalOverlay" style="display:none">
+  <div class="legal-modal">
+    <button class="legal-close" onclick="closeLegalModal()">&#x2715;</button>
+    <div id="legalContent"></div>
+  </div>
+</div>
+
+<!-- MODAL FOTO COMPLETA -->
+<div class="photo-modal-overlay" id="photoModalOverlay">
+  <div class="photo-modal-content">
+    <button class="photo-modal-close" id="photoModalClose">×</button>
+    <img id="photoModalImg" class="photo-modal-img" alt="Foto completa" />
+    <div class="photo-modal-info">
+      <div class="photo-modal-name" id="photoModalName"></div>
+      <div class="photo-modal-role" id="photoModalRole"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- FAB WHATSAPP -->
+<a href="https://wa.me/573212065148" target="_blank" rel="noopener noreferrer" class="fab-whatsapp" aria-label="Contactar por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script src="data.js" charset="UTF-8"></script>
+<script src="app.js" charset="UTF-8"></script>
+</body>
+</html>
