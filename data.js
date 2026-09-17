@@ -485,3 +485,43 @@ const LEGAL_TEXTS = {
     content: "<h2>Canal de PQRS — Mi Ranchito</h2><p>WhatsApp: 321 206 5148</p>"
   }
 };
+
+// RESEÑAS - Local Storage
+const REVIEWS_KEY = 'mr_reviews';
+
+function getReviewsFromStorage() {
+  try {
+    const saved = localStorage.getItem(REVIEWS_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveReviewsToStorage(reviews) {
+  try {
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
+  } catch (e) {}
+}
+
+function addReviewToStorage(name, email, rating, comment) {
+  const reviews = getReviewsFromStorage();
+  const newReview = {
+    id: Date.now(),
+    name: name || 'Cliente Anónimo',
+    email: email || '',
+    rating: Math.min(5, Math.max(1, parseInt(rating))),
+    comment: comment || '',
+    date: new Date().toLocaleDateString('es-CO')
+  };
+  reviews.unshift(newReview);
+  saveReviewsToStorage(reviews);
+  return newReview;
+}
+
+function deleteReviewFromStorage(reviewId) {
+  const reviews = getReviewsFromStorage();
+  const filtered = reviews.filter(r => r.id !== reviewId);
+  saveReviewsToStorage(filtered);
+  return filtered;
+}

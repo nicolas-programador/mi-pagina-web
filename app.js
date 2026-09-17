@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCart();
   setupFilters();
   setupScrollEffects();
+  setupReviews();
   updateCartUI();
 });
 
@@ -1006,3 +1007,139 @@ document.addEventListener('DOMContentLoaded', () => {
     photoModalClose.addEventListener('click', closePhotoModal);
   }
 });
+
+/* ─── RESEÑAS Y OPINIONES ──────────────── */
+function setupReviews() {
+  const starsGroup = document.getElementById('starsGroup');
+  const reviewRatingInput = document.getElementById('reviewRating');
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewComment = document.getElementById('reviewComment');
+  const charCount = document.getElementById('charCount');
+
+  // Star rating selector
+  if (starsGroup) {
+    starsGroup.querySelectorAll('.star-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const rating = btn.dataset.rating;
+        reviewRatingInput.value = rating;
+        
+        starsGroup.querySelectorAll('.star-btn').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        starsGroup.querySelectorAll(`.star-btn[data-rating="${rating}"], .star-btn[data-rating="1"], .star-btn[data-rating="2"], .star-btn[data-rating="3"], .star-btn[data-rating="4"], .star-btn[data-rating="5"]`).forEach((b, idx) => {
+          if (parseInt(b.dataset.rating) <= parseInt(rating)) {
+            b.classList.add('active');
+          }
+        });
+      });
+    });
+  }
+
+  // Character counter
+  if (reviewComment) {
+    reviewComment.addEventListener('input', () => {
+      charCount.textContent = reviewComment.value.length;
+    });
+  }
+
+  // Form submission
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', submitReview);
+  }
+
+  // Load and display reviews
+  displayReviews();
+}
+
+function submitReview(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('reviewName')?.value?.trim() || '';
+  const email = document.getElementById('reviewEmail')?.value?.trim() || '';
+  const rating = document.getElementById('reviewRating')?.value || 5;
+  const comment = document.getElementById('reviewComment')?.value?.trim() || '';
+
+  // Validar correo obligatorio
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    showToast('Por favor ingresa un correo electrónico válido', 'error');
+    document.getElementById('reviewEmail')?.focus();
+    return;
+  }
+
+  if (!rating || rating < 1 || rating > 5) {
+    showToast('Por favor selecciona una calificación', 'error');
+    return;
+  }
+
+  // Add review to storage
+  const review = addReviewToStorage(name, email, rating, comment);
+
+  if (review) {
+    // Clear form
+    document.getElementById('reviewForm').reset();
+    document.getElementById('reviewRating').value = 5;
+    document.getElementById('charCount').textContent = '0';
+    
+    // Reset stars
+    const starsGroup = document.getElementById('starsGroup');
+    if (starsGroup) {
+      starsGroup.querySelectorAll('.star-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx < 5);
+      });
+    }
+
+    // Refresh display
+    displayReviews();
+    showToast('¡Gracias por tu reseña! 🙏', 'success');
+  } else {
+    showToast('Error al guardar la reseña', 'error');
+  }
+}
+
+function displayReviews() {
+  const reviewsList = document.getElementById('reviewsList');
+  if (!reviewsList) return;
+
+  const reviews = getReviewsFromStorage();
+
+  if (reviews.length === 0) {
+    reviewsList.innerHTML = `
+      <div class="reviews-empty">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">⭐</div>
+        <p>Aún no hay reseñas. ¡Sé el primero en dejar una!</p>
+      </div>
+    `;
+    return;
+  }
+
+  reviewsList.innerHTML = reviews.map((review, idx) => {
+    const stars = '⭐'.repeat(review.rating);
+    return `
+      <div class="review-card" style="animation-delay: ${idx * 0.1}s">
+        <div class="review-header">
+          <span class="review-name">${escapeHtml(review.name)}</span>
+          <span class="review-date">${review.date}</span>
+        </div>
+        <div class="review-stars">${stars}</div>
+        ${review.comment ? `<p class="review-comment">${escapeHtml(review.comment)}</p>` : ''}
+        <button type="button" class="review-delete-btn" onclick="handleDeleteReview(${review.id})" aria-label="Eliminar esta reseña">🗑️ Eliminar</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function handleDeleteReview(reviewId) {
+  if (!confirm('¿Seguro que quieres eliminar esta reseña? Esta acción no se puede deshacer.')) return;
+  deleteReviewFromStorage(reviewId);
+  displayReviews();
+  showToast('Reseña eliminada', 'info');
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}

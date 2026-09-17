@@ -27,6 +27,7 @@
       <a href="#bebidas" class="nav-link">Bebidas</a>
       <a href="#nosotros" class="nav-link">Nosotros</a>
       <a href="#contacto" class="nav-link">Contacto</a>
+      <a href="#resenas" class="nav-link">Reseñas</a>
     </nav>
     <div class="nav-actions">
       <button class="cart-btn" id="cartBtn" aria-label="Ver pedido y pagar">
@@ -314,6 +315,64 @@
   </div>
 </section>
 
+<!-- RESEÑAS Y OPINIONES -->
+<section id="resenas" class="reviews-section">
+  <div class="section-header">
+    <span class="section-badge badge-gold">⭐ Opiniones</span>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub">Déjanos tu reseña y comparte tu experiencia en Mi Ranchito.</p>
+  </div>
+
+  <!-- FORMULARIO DE RESEÑA -->
+  <div class="review-form-container">
+    <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
+      <div class="review-form-grid">
+        <div class="review-form-col">
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="reviewName" placeholder="Tu nombre (opcional)" class="form-input" maxlength="50" />
+          </div>
+
+          <div class="input-with-icon">
+            <span class="input-icon">📧</span>
+            <input type="email" id="reviewEmail" placeholder="Tu correo electrónico *" class="form-input" required />
+          </div>
+          <small class="review-email-note">🔒 Tu correo no se muestra públicamente, solo se usa para validar tu reseña.</small>
+          
+          <div class="rating-selector">
+            <label class="rating-label">¿Cómo fue tu experiencia? *</label>
+            <div class="stars-group" id="starsGroup">
+              <button type="button" class="star-btn" data-rating="1" aria-label="1 estrella">⭐</button>
+              <button type="button" class="star-btn" data-rating="2" aria-label="2 estrellas">⭐</button>
+              <button type="button" class="star-btn" data-rating="3" aria-label="3 estrellas">⭐</button>
+              <button type="button" class="star-btn" data-rating="4" aria-label="4 estrellas">⭐</button>
+              <button type="button" class="star-btn" data-rating="5" aria-label="5 estrellas">⭐</button>
+            </div>
+            <input type="hidden" id="reviewRating" value="5" required />
+          </div>
+        </div>
+
+        <div class="review-form-col">
+          <div class="input-with-icon full-height">
+            <span class="input-icon">💬</span>
+            <textarea id="reviewComment" placeholder="Cuéntanos tu experiencia (opcional)" class="form-input form-textarea" maxlength="300" rows="4"></textarea>
+            <span class="char-count"><span id="charCount">0</span>/300</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-review-submit">✍️ Enviar Reseña</button>
+    </form>
+  </div>
+
+  <!-- LISTA DE RESEÑAS -->
+  <div class="reviews-list-container">
+    <div class="reviews-list" id="reviewsList">
+      <!-- Las reseñas se cargan aquí -->
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-top">
@@ -449,15 +508,18 @@
 
 
       <!-- DATOS DEL CLIENTE -->
-      <div class="customer-form">
+      <div class="customer-form customer-form-expanded">
         <p class="section-form-title">📋 Datos de Entrega</p>
-        <div class="input-with-icon">
-          <span class="input-icon">👤</span>
-          <input type="text" id="clientName" placeholder="Tu nombre completo *" class="form-input" required autocomplete="name" />
-        </div>
-        <div class="input-with-icon">
-          <span class="input-icon">📞</span>
-          <input type="tel" id="clientPhone" placeholder="Número de Celular *" class="form-input" required autocomplete="tel" />
+        
+        <div class="customer-grid-2col">
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="clientName" placeholder="Tu nombre completo *" class="form-input" required autocomplete="name" />
+          </div>
+          <div class="input-with-icon">
+            <span class="input-icon">📞</span>
+            <input type="tel" id="clientPhone" placeholder="Número de Celular *" class="form-input" required autocomplete="tel" />
+          </div>
         </div>
         
         <div id="addressGroup">
@@ -473,7 +535,7 @@
         
         <div class="input-with-icon">
           <span class="input-icon">📝</span>
-          <textarea id="clientNotes" placeholder="Observaciones (ej: término de carne, jugos helados, indicaciones de llegada)" class="form-input form-textarea"></textarea>
+          <textarea id="clientNotes" placeholder="Observaciones adicionales (ej: término de carne, jugos helados, indicaciones de llegada) — Opcional" class="form-input form-textarea" rows="3"></textarea>
         </div>
       </div>
     </div>
