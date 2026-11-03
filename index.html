@@ -26,6 +26,7 @@
       <a href="#restaurante" class="nav-link">Restaurante</a>
       <a href="#bebidas" class="nav-link">Bebidas</a>
       <a href="#nosotros" class="nav-link">Nosotros</a>
+      <a href="#resenas" class="nav-link">Reseñas</a>
       <a href="#contacto" class="nav-link">Contacto</a>
     </nav>
     <div class="nav-actions">
@@ -185,6 +186,106 @@
   </div>
 </section>
 
+<!-- RESEÑAS -->
+<style>
+  .rv-section{padding:80px 20px;}
+  .rv-summary{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto 32px;text-align:center;}
+  .rv-avg{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:#C8973A;line-height:1;}
+  .rv-stars{color:#C8973A;letter-spacing:2px;font-size:1.15rem;}
+  .rv-count{font-size:.9rem;opacity:.7;}
+  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:0 auto 36px;}
+  .rv-card{background:#fff;border:1px solid rgba(200,151,58,.25);border-radius:16px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:10px;}
+  .rv-card p{margin:0;line-height:1.55;}
+  .rv-meta{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;opacity:.75;margin-top:auto;}
+  .rv-name{font-weight:600;}
+  .rv-empty{max-width:560px;margin:0 auto 32px;text-align:center;padding:32px 24px;border:2px dashed rgba(200,151,58,.45);border-radius:16px;}
+  .rv-empty-icon{font-size:2.4rem;margin-bottom:8px;}
+  .rv-empty h3{margin:0 0 6px;}
+  .rv-empty p{margin:0;opacity:.8;}
+  .rv-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+</style>
+<section id="resenas" class="menu-section rv-section">
+  <div class="section-header">
+    <span class="section-badge badge-gold">⭐ Reseñas</span>
+    <h2 class="section-title">Lo que dicen<br/>nuestros clientes</h2>
+    <p class="section-sub">Tu opinión nos ayuda a seguir mejorando. Cuéntanos cómo te fue con tu pedido.</p>
+  </div>
+
+  <div class="rv-summary" id="rvSummary" style="display:none;">
+    <div class="rv-avg" id="rvAvg">5.0</div>
+    <div class="rv-stars" id="rvAvgStars">★★★★★</div>
+    <div class="rv-count" id="rvCount"></div>
+  </div>
+
+  <div class="rv-grid" id="rvGrid"></div>
+
+  <div class="rv-empty" id="rvEmpty" style="display:none;">
+    <div class="rv-empty-icon">💬</div>
+    <h3>Sé el primero en dejar tu reseña</h3>
+    <p>¿Ya probaste nuestras picadas, el pan o el almuerzo del día? Tu opinión cuenta.</p>
+  </div>
+
+  <div class="rv-actions">
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=4.4547957,-74.6428656" target="_blank" rel="noopener noreferrer" class="btn btn-primary">⭐ Dejar reseña en Google Maps</a>
+    <a href="https://api.whatsapp.com/send?phone=573212065148&amp;text=Hola%20Mi%20Ranchito,%20quiero%20dejar%20mi%20rese%C3%B1a:%20" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">💬 Enviar reseña por WhatsApp</a>
+  </div>
+</section>
+
+<script>
+  /* Agrega aquí SOLO reseñas reales de clientes (con su permiso).
+     Formato: { nombre: "Nombre", estrellas: 5, texto: "Comentario del cliente", fecha: "Octubre 2026" } */
+  var RESENAS = [];
+
+  (function () {
+    var grid = document.getElementById('rvGrid');
+    var empty = document.getElementById('rvEmpty');
+    var summary = document.getElementById('rvSummary');
+    if (!grid) return;
+
+    function stars(n) {
+      n = Math.max(0, Math.min(5, Math.round(n)));
+      return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    }
+
+    if (!RESENAS.length) { empty.style.display = 'block'; return; }
+
+    var total = 0;
+    RESENAS.forEach(function (r) {
+      total += Number(r.estrellas) || 0;
+      var card = document.createElement('article');
+      card.className = 'rv-card';
+
+      var st = document.createElement('div');
+      st.className = 'rv-stars';
+      st.textContent = stars(r.estrellas);
+
+      var p = document.createElement('p');
+      p.textContent = '“' + (r.texto || '') + '”';
+
+      var meta = document.createElement('div');
+      meta.className = 'rv-meta';
+      var nm = document.createElement('span');
+      nm.className = 'rv-name';
+      nm.textContent = r.nombre || 'Cliente';
+      var dt = document.createElement('span');
+      dt.textContent = r.fecha || '';
+      meta.appendChild(nm);
+      meta.appendChild(dt);
+
+      card.appendChild(st);
+      card.appendChild(p);
+      card.appendChild(meta);
+      grid.appendChild(card);
+    });
+
+    var avg = total / RESENAS.length;
+    document.getElementById('rvAvg').textContent = avg.toFixed(1);
+    document.getElementById('rvAvgStars').textContent = stars(avg);
+    document.getElementById('rvCount').textContent = RESENAS.length + (RESENAS.length === 1 ? ' reseña' : ' reseñas');
+    summary.style.display = 'flex';
+  })();
+</script>
+
 <!-- CONTACTO -->
 <section id="contacto" class="contact-section">
   <div class="section-header">
@@ -251,6 +352,7 @@
       <a href="#panaderia">Panadería y Dulces</a>
       <a href="#restaurante">Restaurante</a>
       <a href="#bebidas">Bebidas</a>
+      <a href="#resenas">Reseñas</a>
     </div>
     <div class="footer-links">
       <h4>Legal</h4>
@@ -258,6 +360,7 @@
       <a href="#" onclick="showLegal('terminos');return false;">Términos y Condiciones</a>
       <a href="#" onclick="showLegal('retracto');return false;">Derecho de Retracto</a>
       <a href="#" onclick="showLegal('pqrs');return false;">PQRS</a>
+      <a href="admin.html" style="opacity:0.5; font-size:0.8rem;">⚙️ Admin</a>
     </div>
     <div class="footer-social">
       <h4>Contacto (6:30 AM - 8:30 PM)</h4>

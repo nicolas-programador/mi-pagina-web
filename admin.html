@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Mi Ranchito</title>
+  <link rel="icon" type="image/x-icon" href="icono.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #C8973A;
+      --gold-light: #E8B86D;
+      --gold-dark: #A07828;
+      --charcoal: #1A1612;
+      --charcoal2: #252017;
+      --cream: #FAF8F4;
+      --surface: #FFFFFF;
+      --border: #E8E0D0;
+      --muted: #8A7A6A;
+      --red: #D94F4F;
+      --red-dark: #B83030;
+      --green: #3A9A5C;
+      --text: #2A2018;
+      --text-light: #6A5A4A;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--charcoal);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ── LOGIN SCREEN ── */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(ellipse at 30% 20%, #2C2218 0%, var(--charcoal) 60%);
+    }
+
+    .login-card {
+      background: #211C15;
+      border: 1px solid rgba(200,151,58,0.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-size: 2.8rem;
+      margin-bottom: 6px;
+    }
+
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .login-subtitle {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.85rem;
+      margin-bottom: 32px;
+    }
+
+    .login-form { text-align: left; }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(200,151,58,0.2);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,151,58,0.15);
+    }
+
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .login-error {
+      background: rgba(217,79,79,0.15);
+      border: 1px solid rgba(217,79,79,0.4);
+      border-radius: var(--radius-sm);
+      color: #FF9090;
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border: none;
+      border-radius: var(--radius-sm);
+      color: var(--charcoal);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 14px;
+      margin-top: 8px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-login:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-login:active { transform: translateY(0); }
+
+    /* ── ADMIN PANEL ── */
+    #adminPanel { display: none; min-height: 100vh; background: var(--cream); }
+
+    /* Header */
+    .admin-header {
+      background: var(--charcoal);
+      border-bottom: 2px solid var(--gold);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-logo {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .admin-header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(200,151,58,0.4);
+      border-radius: var(--radius-sm);
+      color: var(--gold);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      padding: 7px 14px;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover { background: rgba(200,151,58,0.1); border-color: var(--gold); }
+
+    /* Tabs */
+    .admin-tabs {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0 24px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 16px 22px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-btn:hover { color: var(--gold); }
+    .tab-btn.active {
+      border-bottom-color: var(--gold);
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Main content */
+    .admin-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    .section-panel { display: none; }
+    .section-panel.active { display: block; }
+
+    /* Section toolbar */
+    .section-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-toolbar h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--charcoal);
+    }
+
+    .section-toolbar p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--charcoal);
+    }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-light);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-danger {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-danger:hover { background: var(--red-dark); }
+
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* Table */
+    .table-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    thead {
+      background: #F4EFE6;
+    }
+
+    thead th {
+      color: var(--text-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 12px 16px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:nth-child(even) { background: #FDFBF8; }
+    tbody tr:hover { background: #F9F4EC; }
+
+    tbody td {
+      color: var(--text);
+      font-size: 0.88rem;
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    .td-emoji { font-size: 1.3rem; }
+
+    .td-name { font-weight: 600; }
+
+    .td-price {
+      color: var(--gold-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .badge-pill {
+      background: rgba(200,151,58,0.12);
+      border: 1px solid rgba(200,151,58,0.3);
+      border-radius: 20px;
+      color: var(--gold-dark);
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 10px;
+    }
+
+    .td-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-edit {
+      background: rgba(200,151,58,0.1);
+      border: 1px solid rgba(200,151,58,0.3);
+      border-radius: 6px;
+      color: var(--gold-dark);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      transition: all 0.2s;
+    }
+    .btn-edit:hover { background: rgba(200,151,58,0.22); }
+
+    .btn-del {
+      background: rgba(217,79,79,0.08);
+      border: 1px solid rgba(217,79,79,0.25);
+      border-radius: 6px;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      transition: all 0.2s;
+    }
+    .btn-del:hover { background: rgba(217,79,79,0.18); }
+
+    .empty-table {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 40px;
+      text-align: center;
+    }
+
+    /* Reset bar */
+    .reset-bar {
+      background: #FFF8EC;
+      border: 1px solid rgba(200,151,58,0.3);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 14px 20px;
+      flex-wrap: wrap;
+    }
+
+    .reset-bar-icon { font-size: 1.4rem; }
+
+    .reset-bar-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .reset-bar-text strong {
+      color: var(--charcoal);
+      font-size: 0.9rem;
+    }
+
+    .reset-bar-text p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      bottom: 0;
+      display: none;
+      left: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .modal-header {
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      z-index: 1;
+    }
+
+    .modal-header h3 {
+      color: var(--charcoal);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .modal-body { padding: 24px; }
+
+    .modal-footer {
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding: 16px 24px;
+      position: sticky;
+      bottom: 0;
+      background: var(--surface);
+    }
+
+    /* Form fields inside modal */
+    .field-group {
+      margin-bottom: 16px;
+    }
+
+    .field-group label {
+      color: var(--text-light);
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .field-group input,
+    .field-group textarea,
+    .field-group select {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      padding: 10px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    .field-group input:focus,
+    .field-group textarea:focus,
+    .field-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+    }
+
+    .field-group textarea { min-height: 70px; resize: vertical; }
+
+    .field-hint {
+      color: var(--muted);
+      font-size: 0.76rem;
+      margin-top: 4px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .checkbox-group {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      accent-color: var(--gold);
+      height: 16px;
+      width: 16px;
+    }
+
+    .checkbox-group label {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* ── TOAST ── */
+    .toast-wrap {
+      bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: fixed;
+      right: 24px;
+      z-index: 9999;
+    }
+
+    .toast {
+      animation: toastIn 0.3s ease;
+      background: var(--charcoal);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      color: #fff;
+      font-size: 0.88rem;
+      max-width: 320px;
+      padding: 12px 16px;
+    }
+
+    .toast.success { border-left-color: var(--green); }
+    .toast.error { border-left-color: var(--red); }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .admin-content { padding: 16px; }
+      .field-row { grid-template-columns: 1fr; }
+      .login-card { padding: 32px 24px; }
+      .section-toolbar { flex-direction: column; align-items: flex-start; }
+      thead th:nth-child(3),
+      tbody td:nth-child(3),
+      thead th:nth-child(5),
+      tbody td:nth-child(5) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">🍖</div>
+    <h1 class="login-title">Mi Ranchito</h1>
+    <p class="login-subtitle">Panel de Administración · Acceso restringido</p>
+
+    <form class="login-form" id="loginForm" onsubmit="checkLogin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Correo electrónico</label>
+        <input type="email" id="loginEmail" placeholder="admin@gmail.com" autocomplete="email" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Contraseña</label>
+        <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+      <div class="login-error" id="loginError">❌ Credenciales incorrectas. Verifica tu email y contraseña.</div>
+      <button type="submit" class="btn-login">🔐 Ingresar al Panel</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN PANEL ══════════════ -->
+<div id="adminPanel">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-logo">🍖 Mi Ranchito — Admin</div>
+    <div class="admin-header-right">
+      <button class="btn-logout" onclick="doLogout()">⬅ Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="admin-tabs">
+    <button class="tab-btn active" data-section="asadero" onclick="switchTab('asadero')">🥩 Asadero</button>
+    <button class="tab-btn" data-section="panaderia" onclick="switchTab('panaderia')">🥐 Panadería</button>
+    <button class="tab-btn" data-section="restaurante" onclick="switchTab('restaurante')">🍽️ Restaurante</button>
+    <button class="tab-btn" data-section="bebidas" onclick="switchTab('bebidas')">🥤 Bebidas</button>
+  </div>
+
+  <!-- Content -->
+  <div class="admin-content">
+
+    <!-- ASADERO -->
+    <div class="section-panel active" id="panel-asadero">
+      <div class="section-toolbar">
+        <div>
+          <h2>🥩 Asadero</h2>
+          <p>Picadas, sopas y platos del asadero</p>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-gold" onclick="openProductModal('asadero', null)">➕ Agregar Producto</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="table-asadero">
+          <thead>
+            <tr>
+              <th>Emoji</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Badge</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-asadero"></tbody>
+        </table>
+      </div>
+      <div class="reset-bar">
+        <div class="reset-bar-icon">🔄</div>
+        <div class="reset-bar-text">
+          <strong>Restaurar productos originales del Asadero</strong>
+          <p>Borra los cambios de esta sección y vuelve a los datos originales de data.js</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="resetSection('asadero')">Restaurar Asadero</button>
+      </div>
+    </div>
+
+    <!-- PANADERÍA -->
+    <div class="section-panel" id="panel-panaderia">
+      <div class="section-toolbar">
+        <div>
+          <h2>🥐 Panadería</h2>
+          <p>Panes artesanales, dulces y galletas</p>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-gold" onclick="openProductModal('panaderia', null)">➕ Agregar Producto</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="table-panaderia">
+          <thead>
+            <tr>
+              <th>Emoji</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Badge</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-panaderia"></tbody>
+        </table>
+      </div>
+      <div class="reset-bar">
+        <div class="reset-bar-icon">🔄</div>
+        <div class="reset-bar-text">
+          <strong>Restaurar productos originales de Panadería</strong>
+          <p>Borra los cambios de esta sección y vuelve a los datos originales de data.js</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="resetSection('panaderia')">Restaurar Panadería</button>
+      </div>
+    </div>
+
+    <!-- RESTAURANTE -->
+    <div class="section-panel" id="panel-restaurante">
+      <div class="section-toolbar">
+        <div>
+          <h2>🍽️ Restaurante</h2>
+          <p>Almuerzos, sopas y platos del restaurante</p>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-gold" onclick="openProductModal('restaurante', null)">➕ Agregar Producto</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="table-restaurante">
+          <thead>
+            <tr>
+              <th>Emoji</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Badge</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-restaurante"></tbody>
+        </table>
+      </div>
+      <div class="reset-bar">
+        <div class="reset-bar-icon">🔄</div>
+        <div class="reset-bar-text">
+          <strong>Restaurar productos originales del Restaurante</strong>
+          <p>Borra los cambios de esta sección y vuelve a los datos originales de data.js</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="resetSection('restaurante')">Restaurar Restaurante</button>
+      </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="section-panel" id="panel-bebidas">
+      <div class="section-toolbar">
+        <div>
+          <h2>🥤 Bebidas</h2>
+          <p>Gaseosas, cervezas, jugos y aguas</p>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-gold" onclick="openProductModal('bebidas', null)">➕ Agregar Producto</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="table-bebidas">
+          <thead>
+            <tr>
+              <th>Emoji</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Badge</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-bebidas"></tbody>
+        </table>
+      </div>
+      <div class="reset-bar">
+        <div class="reset-bar-icon">🔄</div>
+        <div class="reset-bar-text">
+          <strong>Restaurar productos originales de Bebidas</strong>
+          <p>Borra los cambios de esta sección y vuelve a los datos originales de data.js</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="resetSection('bebidas')">Restaurar Bebidas</button>
+      </div>
+    </div>
+
+  </div><!-- /admin-content -->
+</div><!-- /adminPanel -->
+
+<!-- ══════════════ PRODUCT MODAL ══════════════ -->
+<div class="modal-overlay" id="productModalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalTitle">Agregar Producto</h3>
+      <button class="modal-close" onclick="closeProductModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <form id="productForm" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="fSection" />
+        <input type="hidden" id="fProductId" />
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="fEmoji">Emoji</label>
+            <input type="text" id="fEmoji" placeholder="🥩" maxlength="5" />
+          </div>
+          <div class="field-group">
+            <label for="fName">Nombre *</label>
+            <input type="text" id="fName" placeholder="Picada Tradicional" required />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="fDesc">Descripción</label>
+          <textarea id="fDesc" placeholder="Descripción del producto..."></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="fPrice">Precio base (COP) *</label>
+            <input type="number" id="fPrice" placeholder="30000" min="0" required />
+          </div>
+          <div class="field-group">
+            <label for="fCategory">Categoría *</label>
+            <input type="text" id="fCategory" placeholder="picadas / panes / bebidas..." required />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="fBadge">Badge / Etiqueta</label>
+          <input type="text" id="fBadge" placeholder="Popular, Fresco, Favorito..." />
+          <div class="field-hint">Dejar vacío para sin badge.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="fTags">Tags (separados por coma)</label>
+          <input type="text" id="fTags" placeholder="Por unidad, Familiar, Desde $30.000" />
+          <div class="field-hint">Ejemplo: Por unidad, Desde $30.000, Cerdo y Res</div>
+        </div>
+
+        <div class="field-group">
+          <label for="fImg">Imagen (URL o nombre de archivo)</label>
+          <input type="text" id="fImg" placeholder="picada.jpeg o https://..." />
+          <div class="field-hint">Nombre de archivo local (ej: rollo,500 unidad.jpeg) o URL completa.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="fPriceOptions">Opciones de precio (JSON)</label>
+          <textarea id="fPriceOptions" placeholder='[30000, 35000, 40000] o [{"price":8000,"label":"$8.000 (En local)"},{"price":9000,"label":"$9.000 (Para llevar)"}]' style="min-height:56px;font-size:0.8rem;font-family:monospace;"></textarea>
+          <div class="field-hint">Dejar vacío para usar solo el precio base. Acepta array de números o de objetos {price, label}.</div>
+        </div>
+
+        <!-- hasMeat: solo visible para asadero -->
+        <div class="checkbox-group" id="hasMeatRow" style="display:none;">
+          <input type="checkbox" id="fHasMeat" />
+          <label for="fHasMeat">🍖 ¿Incluye carne? (activa domicilio gratis en Tocaima)</label>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" type="button" onclick="closeProductModal()">Cancelar</button>
+      <button class="btn btn-gold" type="submit" form="productForm">💾 Guardar Producto</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Scripts -->
+<script src="data.js" charset="UTF-8"></script>
+<script src="admin.js" charset="UTF-8"></script>
+</body>
+</html>
